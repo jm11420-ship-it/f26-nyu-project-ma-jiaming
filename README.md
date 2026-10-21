@@ -1,51 +1,75 @@
-# Student Reminder
+## **Instructions**
 
-A simple student reminder tool. Add an event, choose its date and time, and select a priority. The goal is to help students remember an event in time to act.
+### **Step-by-Step: Getting Set Up**
 
-## Section inventory (planned before the HTML)
 
-Based on the simplified Assignment 4 mockup, in reading order:
+**1\. Click the green "Use this template" button**
 
-1. Header: Student Reminder and a short introduction.
-2. Add a reminder: event name, date, time, priority, and Save reminder.
-3. Saved state example: event summary and Done.
-4. Reminder state example: event summary, timing message, and Got it.
-5. Footer: the intended reminder behavior while the page is open.
+This creates a brand new repository under your own GitHub account, pre-loaded with the starting files.
 
-The two state examples stay visible in this structure exercise so they can be checked. They represent different moments in the same flow, not extra features.
+**2\. Name your repository**
 
-## Current scope
+Use this naming convention:
 
-This is the HTML structure and basic CSS stage. Text, date, time, and radio inputs use normal browser controls. Buttons can be clicked, but their behavior has not been implemented yet. Nothing is saved, and no notifications are scheduled.
+`nyu-f26-lastname-firstname`
 
-The sample event (Group meeting, October 13, 2026 at 3:00 PM) comes from the mockup. High priority and the 30-minute message are examples, not a finalized reminder schedule. The editable form has no default priority.
+**3\. Click "Create repository from template"**
 
-## Style Tile
+GitHub copies the files and takes you to your new repo page.
 
-- Headings: DM Sans Bold, 32px and 24px; body: Inter, 16px with 24px line height.
-- Primary blue: `#2457D6`; reminder accent: `#F4BC51`.
-- Text: `#17243B`; page background: `#F3F5F9`; surfaces: `#FFFFFF`.
-- Spacing uses multiples of 8px. Form controls have at least 48px touch targets.
-- All blocks stay in normal document flow. No Flexbox, Grid, images, animations, or JavaScript.
+**4\. Click the green "Code" button → "Create Codespace"**
 
-Fonts load from Google Fonts; Arial is the fallback when offline.
+**5\. Wait about 15 minutes while it boots up**
 
-## Structure and future layout
+This is normal. Codespaces is spinning up a virtual computer for you in the cloud, installing dependencies, and opening VS Code in your browser. Grab a sip of water while it loads.
 
-The header introduces the page. One `main` contains three labeled `section` elements. The form uses labels linked to inputs and a `fieldset` for the three priority choices. The footer contains the reminder note. Each block has its own comment and can be moved later.
+**6\. You're ready**
 
-The date and time fields each have a wrapper. They stay stacked now, but can be placed next to each other later for the desktop layout shown in Assignment 4. The saved and reminder examples are separate sections, ready to become actual states in a later assignment.
+When the browser tab opens to VS Code, open the `style.css` file in the file explorer on the left. The base styles are already written for you, and each rule has **STEP** comments showing where the grid properties go. That's your starting point — we'll type the grid code together in class, one step at a time.
 
-## Preview
+---
 
-Open this repository in GitHub Codespaces. Right-click `index.html` and select **Open with Live Server**. Save changes to refresh the preview.
+## **GitHub Codespaces — A Brief Guide**
 
-For a local copy, double-click `index.html` to open it in a browser.
+### **What Is It?**
 
-## Files
+Codespaces is a development environment that runs entirely in your browser. Instead of installing software on your own computer, you get a virtual computer in the cloud — pre-configured and ready to code — that you access through a web browser. Microsoft (which owns GitHub) hosts it.
 
-- `index.html`: content, semantic sections, and native form controls.
-- `style.css`: the template reset followed by the basic visual styles.
-- `.devcontainer/devcontainer.json`: the teacher's original Codespaces setup.
+### **What It Saves Us From**
 
-Started from [the course project template](https://github.com/profJoey/nyu-f26-project-template).
+Normally, getting a development environment set up requires installing and configuring a bunch of tools:
+
+* A code editor (VS Code)  
+* A terminal (command line)  
+* Git (version control)  
+* Node.js, Python, or whatever runtime the project needs  
+* Extensions, themes, settings
+
+Each one of these can break in unique ways depending on your operating system, your computer's permissions, or just bad luck. **Codespaces eliminates all of that.** You click one button and you're in a fully working environment. No "it works on my machine" problems.
+
+### **How It Works (High Level)**
+
+1. A project lives in a GitHub repository.  
+2. You click the green **Code** button and select **Open with Codespaces**.  
+3. GitHub spins up a lightweight virtual machine running Linux, installs the project's dependencies automatically, and opens a browser-based version of VS Code.  
+4. You code, save, and commit just like you would on your local machine.  
+5. When you're done, you stop the Codespace. Next time you come back, everything is exactly where you left it.
+
+The environment is defined by a file called `devcontainer.json` (or `.devcontainer/`) in the repository. It's like a recipe that tells GitHub "this project needs X, Y, and Z."
+
+### **The Catch: It's Slow to Start (And Why)**
+
+A cold start takes **1–3 minutes**. Here's why:
+
+* **A new virtual machine has to boot.** Codespaces isn't "running" until you open it. There's no always-on computer — one is created for you on demand. That means spinning up an OS from scratch.  
+* **Your dependencies install.** If the project requires packages or libraries, Codespaces runs the install process when it starts. This is the same `npm install` or `pip install` you'd run locally — it just happens automatically.  
+* **Extensions and settings sync.** VS Code loads your extensions, themes, and preferences from your GitHub account.
+
+**Once it's running, it's fast.** The delay is only on the first launch of the day (or after you've manually stopped the Codespace). If you keep it open between sessions, there's no wait.
+
+### **Tips**
+
+* **Don't close your Codespace mid-session.** Just leave the tab open. If you close it, stop the Codespace from the GitHub dashboard so it doesn't eat into your monthly usage hours.  
+* **Your work is saved automatically.** Even if the Codespace stops, the files are stored on GitHub. You won't lose anything.  
+* **You get a fixed number of free hours per month** through the GitHub Student Developer Pack. A cold start uses some of those hours just booting up, so it's worth keeping one Codespace alive while you're actively working.  
+* **If you need to work offline,** you can always install VS Code and Git locally instead but it does take some set up — Codespaces is a convenience, not a requirement.

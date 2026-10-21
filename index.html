@@ -30,12 +30,12 @@
             <input id="event-name" name="event-name" type="text" placeholder="Group meeting" required />
           </div>
           <div class="field">
-            <label for="event-date">Date</label>
-            <input id="event-date" name="event-date" type="date" required />
+            <label for="event-date">Date (YYYY-MM-DD)</label>
+            <input id="event-date" name="event-date" type="text" placeholder="2026-10-21" maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])" required />
           </div>
           <div class="field">
-            <label for="event-time">Time</label>
-            <input id="event-time" name="event-time" type="time" required />
+            <label for="event-time">Time (HH:MM, 24-hour)</label>
+            <input id="event-time" name="event-time" type="text" placeholder="15:00" maxlength="5" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" required />
           </div>
 
           <!-- A shared name makes these three radios one choice. -->
@@ -55,7 +55,7 @@
         <p class="note">Saved state example</p>
         <h2 id="saved-heading">Reminder saved</h2>
         <p><strong>Group meeting</strong></p>
-        <p><time datetime="2026-10-13T15:00">Oct 13, 2026 at 3:00 PM</time></p>
+        <p><time datetime="2026-10-13T15:00">2026-10-13 at 15:00</time></p>
         <p>Priority: High</p>
         <button type="button">Done</button>
       </section>
@@ -65,7 +65,7 @@
         <p class="note">Reminder state example</p>
         <h2 id="reminder-heading">Reminder</h2>
         <p><strong>Group meeting</strong></p>
-        <p><time datetime="2026-10-13T15:00">Oct 13, 2026 at 3:00 PM</time></p>
+        <p><time datetime="2026-10-13T15:00">2026-10-13 at 15:00</time></p>
         <p><strong>Starts in 30 minutes</strong></p>
         <button type="button">Got it</button>
       </section>
