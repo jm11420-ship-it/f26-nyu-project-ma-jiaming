@@ -3,11 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Project</title>
+    <title>Student Reminder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- START BELOW -->
-     
+    <!-- Section inventory: header, add reminder, saved example, reminder example, footer. -->
+
+    <!-- HEADER: the page's only h1 introduces the tool. -->
+    <header>
+      <h1>Student Reminder</h1>
+      <p>Add an event and choose a priority. The tool sets the reminder timing for you.</p>
+    </header>
+
+    <main>
+      <!-- ADD REMINDER: each label is connected to an input by its id. -->
+      <section aria-labelledby="add-heading" id="add-reminder">
+        <h2 id="add-heading">Add a reminder</h2>
+        <p class="note" id="preview-note">Preview only. Entries are not saved yet.</p>
+        <form aria-describedby="preview-note">
+          <div class="field">
+            <label for="event-name">Event name</label>
+            <input id="event-name" name="event-name" type="text" placeholder="Group meeting" required />
+          </div>
+          <div class="field">
+            <label for="event-date">Date</label>
+            <input id="event-date" name="event-date" type="date" required />
+          </div>
+          <div class="field">
+            <label for="event-time">Time</label>
+            <input id="event-time" name="event-time" type="time" required />
+          </div>
+
+          <!-- A shared name makes these three radios one choice. -->
+          <fieldset aria-describedby="priority-help">
+            <legend>Priority</legend>
+            <label class="priority-option"><input type="radio" name="priority" value="low" required /> Low</label>
+            <label class="priority-option"><input type="radio" name="priority" value="medium" /> Medium</label>
+            <label class="priority-option"><input type="radio" name="priority" value="high" /> High</label>
+            <p id="priority-help">Choose a priority. Reminder timing is set for you.</p>
+          </fieldset>
+          <button type="button" disabled>Save reminder</button>
+        </form>
+      </section>
+
+      <!-- SAVED EXAMPLE: a visible sample of the confirmation state in the mockup. -->
+      <section aria-labelledby="saved-heading">
+        <p class="note">Saved state example</p>
+        <h2 id="saved-heading">Reminder saved</h2>
+        <p><strong>Group meeting</strong></p>
+        <p><time datetime="2026-10-13T15:00">Oct 13, 2026 at 3:00 PM</time></p>
+        <p>Priority: High</p>
+        <button type="button" disabled>Done</button>
+      </section>
+
+      <!-- REMINDER EXAMPLE: 30 minutes is sample copy, not a priority rule. -->
+      <section class="reminder" aria-labelledby="reminder-heading">
+        <p class="note">Reminder state example</p>
+        <h2 id="reminder-heading">Reminder</h2>
+        <p><strong>Group meeting</strong></p>
+        <p><time datetime="2026-10-13T15:00">Oct 13, 2026 at 3:00 PM</time></p>
+        <p><strong>Starts in 30 minutes</strong></p>
+        <button type="button" disabled>Got it</button>
+      </section>
+    </main>
+
+    <!-- FOOTER: distinguish the intended behavior from this static preview. -->
+    <footer>
+      <p>Planned behavior: reminders appear while this page is open.</p>
+      <p>This preview does not send reminders. The example buttons are not active.</p>
+    </footer>
   </body>
 </html>

@@ -8,3 +8,139 @@
 }
 
 /* START BELOW */
+/* These variables store the colors from the Assignment 4 Style Tile. */
+:root {
+  --blue: #2457d6;
+  --amber: #f4bc51;
+  --text: #17243b;
+  --background: #f3f5f9;
+  --surface: #ffffff;
+}
+
+/* Normal flow: blocks stay stacked in the order written in the HTML. */
+body {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  background: var(--background);
+  color: var(--text);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+header,
+section,
+footer {
+  margin-bottom: 24px;
+}
+
+h1,
+h2 {
+  font-family: "DM Sans", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+h1 {
+  color: var(--blue);
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p {
+  margin-bottom: 8px;
+}
+
+section {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--text);
+  border-radius: 8px;
+}
+
+.note {
+  margin-bottom: 16px;
+}
+
+/* Labels are above their controls; spacing uses multiples of 8px. */
+.field,
+fieldset {
+  margin-bottom: 16px;
+}
+
+.field label,
+legend {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.field input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px;
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+fieldset {
+  min-width: 0;
+  border: 0;
+}
+
+.priority-option {
+  display: inline-block;
+  min-height: 48px;
+  padding: 8px;
+  margin: 0 8px 8px 0;
+  border: 1px solid var(--text);
+  border-radius: 8px;
+}
+
+input[type="radio"] {
+  accent-color: var(--blue);
+}
+
+input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+button {
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 8px 24px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blue);
+  color: var(--surface);
+  font: inherit;
+  font-weight: 600;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.reminder {
+  border: 2px solid var(--amber);
+}
+
+footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--text);
+}
