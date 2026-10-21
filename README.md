@@ -16,7 +16,7 @@ The two state examples stay visible in this structure exercise so they can be ch
 
 ## Current scope
 
-This is the HTML structure and basic CSS stage. Text, date, time, and radio inputs use normal browser controls. Action buttons are disabled and labeled as a preview. Nothing is saved, and no notifications are scheduled.
+This is the HTML structure and basic CSS stage. Text, date, time, and radio inputs use normal browser controls. Buttons can be clicked, but their behavior has not been implemented yet. Nothing is saved, and no notifications are scheduled.
 
 The sample event (Group meeting, October 13, 2026 at 3:00 PM) comes from the mockup. High priority and the 30-minute message are examples, not a finalized reminder schedule. The editable form has no default priority.
 
@@ -46,7 +46,6 @@ For a local copy, double-click `index.html` to open it in a browser.
 
 - `index.html`: content, semantic sections, and native form controls.
 - `style.css`: the template reset followed by the basic visual styles.
-- `AI_USE.md`: a record of the AI assistance used for this version.
 - `.devcontainer/devcontainer.json`: the teacher's original Codespaces setup.
 
 Started from [the course project template](https://github.com/profJoey/nyu-f26-project-template).

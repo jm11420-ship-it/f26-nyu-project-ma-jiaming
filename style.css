@@ -111,7 +111,8 @@ input[type="radio"] {
   accent-color: var(--blue);
 }
 
-input:focus-visible {
+input:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
@@ -126,10 +127,7 @@ button {
   color: var(--surface);
   font: inherit;
   font-weight: 600;
-}
-
-button:disabled {
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 strong {
