@@ -1,6 +1,8 @@
 <!doctype html>
-<!-- Mockup inventory: header/introduction, add reminder, saved state, reminder state, footer.
-     Current page also includes the upcoming-reminders list added in Assignment 6. -->
+<!-- 设计稿区块：页头简介、添加提醒、保存成功示例、提醒示例、页脚。
+     Mockup sections: introduction, add reminder, saved example, reminder example, footer.
+     作业6新增了提醒列表，放在表单下方。
+     Assignment 6 adds the reminders list below the form. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,16 +14,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- START BELOW -->
+    <!-- 页面内容从这里开始 / Page content starts here. -->
 
-    <!-- HEADER: the page's only h1 introduces the tool. -->
+    <!-- 页头：h1是整个页面的主标题，只用一次。
+         Header: use one h1 for the main page title. -->
     <header>
       <h1>Student Reminder</h1>
       <p>Add an event and choose a priority. The tool sets the reminder timing for you.</p>
     </header>
 
     <main>
-      <!-- ADD REMINDER: each label is connected to an input by its id. -->
+      <!-- label的for对应输入框的id，点击标签也能定位输入框。
+           Matching label for and input id lets a label focus its input.
+           aria-labelledby让读屏工具通过对应标题识别这个区块。
+           aria-labelledby gives this section its heading as an accessible name. -->
       <section aria-labelledby="add-heading" id="add-reminder">
         <h2 id="add-heading">Add a reminder</h2>
         <p class="note" id="preview-note">Preview only. Entries are not saved yet.</p>
@@ -32,6 +38,8 @@
           </div>
           <div class="field">
             <label for="event-date">Date</label>
+            <!-- inputmode提示手机显示数字键盘；自动补符号由JavaScript完成。
+                 inputmode requests a numeric keyboard; JavaScript adds the separators. -->
             <input id="event-date" name="event-date" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" aria-describedby="date-help date-error" required />
             <p class="input-help" id="date-help">Type 8 digits: YYYYMMDD.</p>
             <p class="input-error" id="date-error" aria-live="polite" hidden></p>
@@ -43,7 +51,8 @@
             <p class="input-error" id="time-error" aria-live="polite" hidden></p>
           </div>
 
-          <!-- A shared name makes these three radios one choice. -->
+          <!-- fieldset把选项放在一组，legend是组名；相同name让单选框只能选一个。
+               fieldset groups options and legend names the group; a shared name allows one radio choice. -->
           <fieldset aria-describedby="priority-help">
             <legend>Priority</legend>
             <label class="priority-option"><input type="radio" name="priority" value="low" required /> Low</label>
@@ -51,18 +60,22 @@
             <label class="priority-option"><input type="radio" name="priority" value="high" /> High</label>
             <p id="priority-help">Choose a priority. Reminder timing is set for you.</p>
           </fieldset>
+          <!-- 这里只展示按钮，尚未连接保存功能。
+               This button is a preview; saving is not connected yet. -->
           <button type="button">Save reminder</button>
         </form>
       </section>
 
-      <!-- UPCOMING REMINDERS: script.js fills this container from the data array. -->
+      <!-- 提醒列表：script.js把数组中的示例事项放到这个容器里。
+           script.js fills this container with example events from the array. -->
       <section aria-labelledby="upcoming-heading">
         <h2 id="upcoming-heading">Upcoming reminders</h2>
         <p class="note">Example reminders</p>
         <div id="reminder-list"></div>
       </section>
 
-      <!-- SAVED EXAMPLE: a visible sample of the confirmation state in the mockup. -->
+      <!-- 保存成功示例：展示设计稿中的确认界面。
+           Saved example: shows the confirmation state from the mockup. -->
       <section aria-labelledby="saved-heading">
         <p class="note">Saved state example</p>
         <h2 id="saved-heading">Reminder saved</h2>
@@ -72,7 +85,8 @@
         <button type="button">Done</button>
       </section>
 
-      <!-- REMINDER EXAMPLE: 30 minutes is sample copy, not a priority rule. -->
+      <!-- 提醒示例：“提前30分钟”只是示例文字，优先级规则尚未确定。
+           The 30-minute message is sample text; priority timing is not decided yet. -->
       <section class="reminder" aria-labelledby="reminder-heading">
         <p class="note">Reminder state example</p>
         <h2 id="reminder-heading">Reminder</h2>
@@ -83,7 +97,8 @@
       </section>
     </main>
 
-    <!-- FOOTER: distinguish the intended behavior from this preview. -->
+    <!-- 页脚：说明计划中的功能，以及当前预览的限制。
+         Footer: explains the planned behavior and the limits of this preview. -->
     <footer>
       <p>Planned behavior: reminders appear while this page is open.</p>
       <p>This preview does not save events or send reminders.</p>

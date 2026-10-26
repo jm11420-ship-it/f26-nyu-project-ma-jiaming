@@ -1,4 +1,5 @@
-/* === RESET === */
+/* 清除浏览器默认边距，方便统一排版。
+   Remove default spacing for a consistent layout. */
 *,
 *::before,
 *::after {
@@ -7,8 +8,8 @@
   box-sizing: border-box;
 }
 
-/* START BELOW */
-/* These variables store the colors from the Assignment 4 Style Tile. */
+/* 用变量集中保存设计稿中的颜色，方便统一修改。
+   Keep the mockup colors in variables so they can be changed together. */
 :root {
   --blue: #2457d6;
   --amber: #f4bc51;
@@ -17,7 +18,8 @@
   --surface: #ffffff;
 }
 
-/* Normal flow: blocks stay stacked in the order written in the HTML. */
+/* 正常文档流：各区块按HTML顺序从上往下排列。
+   Normal flow stacks sections in their HTML order. */
 body {
   max-width: 640px;
   margin: 0 auto;
@@ -35,6 +37,8 @@ footer {
   margin-bottom: 24px;
 }
 
+/* 标题统一字体，再用字号区分层级。
+   Use one heading font and different sizes for each heading level. */
 h1,
 h2,
 h3 {
@@ -78,7 +82,8 @@ section {
   margin-bottom: 16px;
 }
 
-/* Labels are above their controls; spacing uses multiples of 8px. */
+/* 表单标签放在输入框上方，间距以8px的倍数为主。
+   Place labels above inputs; spacing mainly uses multiples of 8px. */
 .field,
 fieldset {
   margin-bottom: 16px;
@@ -132,6 +137,8 @@ input[type="radio"] {
   accent-color: var(--blue);
 }
 
+/* 用键盘操作时，蓝色轮廓标出当前选中的输入框或按钮。
+   A blue outline shows which control has keyboard focus. */
 input:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--blue);
@@ -155,6 +162,8 @@ strong {
   font-weight: 600;
 }
 
+/* 橙色边框突出提醒示例。
+   The amber border highlights the reminder example. */
 .reminder {
   border: 2px solid var(--amber);
 }
