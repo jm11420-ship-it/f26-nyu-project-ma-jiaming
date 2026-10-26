@@ -11,7 +11,7 @@
   </head>
   <body>
     <!-- START BELOW -->
-    <!-- Section inventory: header, add reminder, saved example, reminder example, footer. -->
+    <!-- Section inventory: header, add reminder, upcoming reminders, saved example, reminder example, footer. -->
 
     <!-- HEADER: the page's only h1 introduces the tool. -->
     <header>
@@ -50,6 +50,13 @@
         </form>
       </section>
 
+      <!-- UPCOMING REMINDERS: script.js fills this container from the data array. -->
+      <section aria-labelledby="upcoming-heading">
+        <h2 id="upcoming-heading">Upcoming reminders</h2>
+        <p class="note">Example reminders</p>
+        <div id="reminder-list"></div>
+      </section>
+
       <!-- SAVED EXAMPLE: a visible sample of the confirmation state in the mockup. -->
       <section aria-labelledby="saved-heading">
         <p class="note">Saved state example</p>
@@ -71,10 +78,11 @@
       </section>
     </main>
 
-    <!-- FOOTER: distinguish the intended behavior from this static preview. -->
+    <!-- FOOTER: distinguish the intended behavior from this preview. -->
     <footer>
       <p>Planned behavior: reminders appear while this page is open.</p>
       <p>This preview does not save events or send reminders.</p>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
