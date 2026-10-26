@@ -26,13 +26,15 @@ Checked against the Assignment 4 desktop mockup. All five original sections are 
 
 **Fixed today:**
 - Moved the mockup section inventory to the top of index.html.
-- Changed Date and Time to native inputs and removed their text-format patterns.
+- Added English date/time hints and automatic separators: 20261026 becomes 2026-10-26; 1530 becomes 15:30. Invalid dates and times show a short message when leaving the field.
+
+The feedback recommended native date/time inputs. I tried them, but the date hint displayed Chinese in my browser. This version uses numeric text inputs for a consistent English format, so it no longer has the browser's calendar/time picker. The Save button is still only a preview.
 
 **Still missing (building before the layout assignment):**
 - No content sections are missing.
 - [ ] Match the desktop arrangement: introduction beside the form, with Date and Time on one row.
 
 **One thing I couldn't figure out:**
-- How to keep the native date/time picker in English when the browser uses another language.
+- How to keep a native date/time picker in English across browsers; the text inputs above are a workaround.
 
 **Partner spot-check:** Pending an in-class check with a classmate.

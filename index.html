@@ -32,11 +32,15 @@
           </div>
           <div class="field">
             <label for="event-date">Date</label>
-            <input id="event-date" name="event-date" type="date" required />
+            <input id="event-date" name="event-date" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" aria-describedby="date-help date-error" required />
+            <p class="input-help" id="date-help">Type 8 digits: YYYYMMDD.</p>
+            <p class="input-error" id="date-error" aria-live="polite" hidden></p>
           </div>
           <div class="field">
-            <label for="event-time">Time</label>
-            <input id="event-time" name="event-time" type="time" required />
+            <label for="event-time">Time (24-hour)</label>
+            <input id="event-time" name="event-time" type="text" inputmode="numeric" placeholder="HH:MM" aria-describedby="time-help time-error" required />
+            <p class="input-help" id="time-help">Type 4 digits: HHMM.</p>
+            <p class="input-error" id="time-error" aria-live="polite" hidden></p>
           </div>
 
           <!-- A shared name makes these three radios one choice. -->
