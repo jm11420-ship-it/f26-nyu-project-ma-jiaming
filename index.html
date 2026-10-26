@@ -1,4 +1,6 @@
 <!doctype html>
+<!-- Mockup inventory: header/introduction, add reminder, saved state, reminder state, footer.
+     Current page also includes the upcoming-reminders list added in Assignment 6. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,7 +13,6 @@
   </head>
   <body>
     <!-- START BELOW -->
-    <!-- Section inventory: header, add reminder, upcoming reminders, saved example, reminder example, footer. -->
 
     <!-- HEADER: the page's only h1 introduces the tool. -->
     <header>
@@ -30,12 +31,12 @@
             <input id="event-name" name="event-name" type="text" placeholder="Group meeting" required />
           </div>
           <div class="field">
-            <label for="event-date">Date (YYYY-MM-DD)</label>
-            <input id="event-date" name="event-date" type="text" placeholder="2026-10-21" maxlength="10" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])" required />
+            <label for="event-date">Date</label>
+            <input id="event-date" name="event-date" type="date" required />
           </div>
           <div class="field">
-            <label for="event-time">Time (HH:MM, 24-hour)</label>
-            <input id="event-time" name="event-time" type="text" placeholder="15:00" maxlength="5" pattern="([01][0-9]|2[0-3]):[0-5][0-9]" required />
+            <label for="event-time">Time</label>
+            <input id="event-time" name="event-time" type="time" required />
           </div>
 
           <!-- A shared name makes these three radios one choice. -->
