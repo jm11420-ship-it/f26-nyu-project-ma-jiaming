@@ -22,19 +22,14 @@ The `reminders` array contains five example student events. Each object has `tit
 
 ## Structure Audit — October 26, 2026
 
-Checked against the Assignment 4 desktop mockup. All five original sections are present, with one h1 and clear h2/h3 headings. The upcoming-reminders list was added in Assignment 6. Fonts and colors match the Style Tile. The color variable test worked and was restored. No CSS syntax issues or console errors were found. The script displays five items. There are no navigation links to check.
+All sections are present. Headings, fonts, colors, and the five example reminders display correctly. No console errors were found.
 
 **Fixed today:**
-- Moved the mockup section inventory to the top of index.html.
-- Added English date/time hints and automatic separators: 20261026 becomes 2026-10-26; 1530 becomes 15:30. Invalid dates and times show a short message when leaving the field.
-
-The feedback recommended native date/time inputs. I tried them, but the date hint displayed Chinese in my browser. This version uses numeric text inputs for a consistent English format, so it no longer has the browser's calendar/time picker. The Save button is still only a preview.
+- Added the section list at the top of index.html.
+- Made date/time inputs English-only, with automatic separators and basic error checks.
 
 **Still missing (building before the layout assignment):**
-- No content sections are missing.
-- [ ] Match the desktop arrangement: introduction beside the form, with Date and Time on one row.
+- [ ] On desktop, place the introduction beside the form and put Date and Time on one row.
 
 **One thing I couldn't figure out:**
-- How to keep a native date/time picker in English across browsers; the text inputs above are a workaround.
-
-**Partner spot-check:** Pending an in-class check with a classmate.
+- How to keep the browser's date/time picker in English. For now, I use text inputs instead of the native inputs recommended in the feedback.
