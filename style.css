@@ -1,5 +1,13 @@
-/* 清除浏览器默认边距，方便统一排版。
-   Remove default spacing for a consistent layout. */
+/* LAYOUT PLAN / 布局计划
+   Grid: page shell for section spacing; intro/form for desktop columns;
+   form for paired date/time; upcoming section and items for aligned details.
+   Grid用于页面间距、介绍与表单并排、日期时间同排和列表信息对齐。
+   Flex: priority options form a wrapping row inside the form grid.
+   Flex用于表单网格内部的优先级选项。
+   Normal flow: text, state examples and footer stay in reading order.
+   文字、状态示例和页脚保持正常文档流。 */
+
+/* 清除默认边距 / Remove default spacing. */
 *,
 *::before,
 *::after {
@@ -8,8 +16,7 @@
   box-sizing: border-box;
 }
 
-/* 用变量集中保存设计稿中的颜色，方便统一修改。
-   Keep the mockup colors in variables so they can be changed together. */
+/* 沿用设计稿颜色 / Keep the mockup colors. */
 :root {
   --blue: #2457d6;
   --amber: #f4bc51;
@@ -18,10 +25,8 @@
   --surface: #ffffff;
 }
 
-/* 正常文档流：各区块按HTML顺序从上往下排列。
-   Normal flow stacks sections in their HTML order. */
 body {
-  max-width: 640px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 24px 16px;
   background: var(--background);
@@ -31,14 +36,30 @@ body {
   line-height: 1.5;
 }
 
-header,
-section,
-footer {
-  margin-bottom: 24px;
+/* 外层Grid统一区块间距 / The page grid gives sections a consistent gap. */
+.page {
+  display: grid;
+  gap: 32px;
 }
 
-/* 标题统一字体，再用字号区分层级。
-   Use one heading font and different sizes for each heading level. */
+/* 第一处section Grid：按A4把简介和表单放在一起，手机上下、电脑左右。
+   First section grid: match A4 by keeping the form beside its introduction on desktop, stacked on mobile. */
+.intro-form {
+  display: grid;
+  gap: 24px;
+}
+
+.intro-form > header p {
+  max-width: 48ch;
+}
+
+/* 防止较长内容撑宽网格 / Allow long content to fit inside grid columns. */
+.page > *,
+.intro-form > *,
+form > * {
+  min-width: 0;
+}
+
 h1,
 h2,
 h3 {
@@ -59,19 +80,14 @@ h2 {
 
 h3 {
   font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.reminder-item {
-  padding: 16px 0;
-  border-top: 1px solid var(--text);
 }
 
 p {
+  max-width: 65ch;
   margin-bottom: 8px;
 }
 
-section {
+.panel {
   padding: 24px;
   background: var(--surface);
   border: 1px solid var(--text);
@@ -82,11 +98,11 @@ section {
   margin-bottom: 16px;
 }
 
-/* 表单标签放在输入框上方，间距以8px的倍数为主。
-   Place labels above inputs; spacing mainly uses multiples of 8px. */
-.field,
-fieldset {
-  margin-bottom: 16px;
+/* 表单Grid让日期和时间在宽屏共用一行。
+   The form grid lets date and time share a row on wider screens. */
+form {
+  display: grid;
+  gap: 16px;
 }
 
 .field label,
@@ -124,21 +140,32 @@ fieldset {
   font-weight: 600;
 }
 
+/* fieldset是Grid子项；内部Flex只负责一组选项横排，空间不足时换行。
+   Inside the fieldset grid item, Flex keeps options in a row and allows wrapping. */
+.priority-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
 .priority-option {
-  display: inline-block;
+  flex: 1 1 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-height: 48px;
   padding: 8px;
-  margin: 0 8px 8px 0;
   border: 1px solid var(--text);
   border-radius: 8px;
+  cursor: pointer;
 }
 
 input[type="radio"] {
   accent-color: var(--blue);
 }
 
-/* 用键盘操作时，蓝色轮廓标出当前选中的输入框或按钮。
-   A blue outline shows which control has keyboard focus. */
 input:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--blue);
@@ -158,17 +185,85 @@ button {
   cursor: pointer;
 }
 
+/* 第二处section Grid：统一标题与列表间距，每条事项再对齐信息。
+   Second section grid: space the heading and list; item grids align event details.
+   与A4不同：保留后加的列表，便于回顾事项；当前仍为示例数据，不能编辑。
+   Unlike A4, the added list supports reviewing events; entries are still samples, not editable. */
+.upcoming {
+  display: grid;
+  gap: 16px;
+}
+
+.upcoming .note {
+  margin-bottom: 0;
+}
+
+.reminder-item {
+  display: grid;
+  gap: 8px;
+  padding: 16px 0;
+  border-top: 1px solid var(--text);
+  overflow-wrap: anywhere;
+}
+
+.reminder-item h3,
+.reminder-item p {
+  min-width: 0;
+  margin: 0;
+}
+
 strong {
   font-weight: 600;
 }
 
-/* 橙色边框突出提醒示例。
-   The amber border highlights the reminder example. */
+/* 与A4弹窗不同：状态保留为静态示例，用正常文档流，限制宽度便于阅读。
+   Unlike A4's dialogs, states remain static examples in normal flow with a readable width. */
+.state-example {
+  width: 100%;
+  max-width: 640px;
+  justify-self: center;
+}
+
 .reminder {
   border: 2px solid var(--amber);
 }
 
+/* 功能限制放在页脚，不占用表单；标题沿用现有网页的蓝色。
+   Keep preview limits in the footer; retain the existing page's blue title. */
 footer {
+  margin-top: 32px;
   padding-top: 16px;
   border-top: 1px solid var(--text);
+}
+
+/* 对应A4注释：宽屏介绍与表单并排，日期与时间同排；基础样式用于手机。
+   A4 annotation: pair introduction/form and date/time on wide screens; base styles serve mobile. */
+@media (min-width: 768px) {
+  body {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .intro-form {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .intro-form > header {
+    padding-top: 48px;
+  }
+
+  form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .reminder-item {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+  }
 }
