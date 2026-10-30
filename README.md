@@ -6,6 +6,15 @@
 
 The webpage now adds an upcoming-reminders list below the form. The saved and reminder states are still displayed as examples on the same page.
 
+## Weekly update - October 30, 2026
+
+- Used Grid for the page, introduction/form section, and upcoming-reminders section. Each reminder aligns its name, date/time, and priority.
+- Used Flexbox for the priority options inside the form grid.
+- Followed the A4 desktop layout: introduction beside the form, with Date and Time sharing a row. Below 768px, these areas stack.
+- Kept the list added in Assignment 6. It gives users a place to review events without adding more settings to the form. Editing is not implemented yet.
+- Checked 375px and 1440px, plus the 767/768px breakpoint: no horizontal overflow, controls at least 48px tall, and numeric date/time formatting still works.
+- The saved and reminder states remain static examples below the list, rather than A4's dialogs. Saving and timed reminders are still not connected.
+
 ## Weekly update - October 25, 2026
 
 - Added five reminders generated with JavaScript. Each shows an event name, date, time, and priority.
@@ -28,8 +37,8 @@ All sections are present. Headings, fonts, colors, and the five example reminder
 - Added the section list at the top of index.html.
 - Made date/time inputs English-only, with automatic separators and basic error checks.
 
-**Still missing (building before the layout assignment):**
-- [ ] On desktop, place the introduction beside the form and put Date and Time on one row.
+**Layout follow-up:**
+- [x] October 30: placed the introduction beside the form and Date and Time on one row on desktop.
 
 **One thing I couldn't figure out:**
 - How to keep the browser's date/time picker in English. For now, I use text inputs instead of the native inputs recommended in the feedback.
