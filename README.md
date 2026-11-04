@@ -19,19 +19,19 @@
 
 This first version keeps new reminders on the current page. Refreshing returns to the five examples.
 
-**What changed** — To be completed during implementation.
+**What changed** — Save reminder now adds a valid entry to the list, shows a confirmation, and clears the form for the next entry. Clicking Save and pressing Enter use the same handler. The old saved-state example has been replaced by feedback below the button.
 
-**What was hard, and what I tried** — To be completed during implementation.
+**What was hard, and what I tried** — The existing date and time checks ran when leaving an input. The save handler now checks the values again, so pressing Enter is checked too. Errors appear as English text on the page. New entries reuse the same display function as the five examples.
 
-**What happened when I tried to break it** — To be completed after testing.
+**What happened when I tried to break it** — Browser checks started with five examples and no save message. A valid save added a sixth entry. Empty fields, a spaces-only name, missing priority, February 29 in 2026, November 31, and times 24:00 and 23:60 were rejected. A second entry worked with Enter, including a valid leap day and 00:00. Repeated clicking first replaced the success message with an empty-form error. A check of `reminderSaved` now keeps the success message and prevents another addition until the form is edited. Saving also worked at 375px width. Refreshing returned to the five examples, as intended. No console errors were found.
 
-**What I learned or changed my mind about** — To be completed after testing.
+**What I learned or changed my mind about** — Changing a variable and updating the page are separate steps. The saved state also helps decide what a second click should do. Clearing the form alone did not give the feedback I wanted after repeated clicks.
 
-**Question for Joey** — To be completed before submission.
+**Question for Joey** — Should the next step be keeping reminders after a refresh, or working on reminder timing?
 
-**Next week's goal** — To be completed before submission.
+**Next week's goal** — Decide how reminders should remain available after a refresh.
 
-**AI use** — Codex helped organize the state plan from my decision to make Save reminder work. Implementation and testing details will be added as the work is completed.
+**AI use** — Codex helped implement and debug the JavaScript, run browser checks, and organize this log. I chose Save reminder because quick event entry is the main goal of my project.
 
 ## Weekly update - October 30, 2026
 
@@ -54,7 +54,7 @@ This first version keeps new reminders on the current page. Refreshing returns t
 
 The `reminders` array contains five example student events. Each object has `title`, `date`, `time`, and `priority`, matching the information in the form. The dates are demonstration data, not an actual class schedule.
 
-`script.js` finds the `reminder-list` container. A `forEach` loop processes every reminder in order; an index is not needed. For each item, `document.createElement()` creates an article, heading, time element, and paragraphs. `textContent` fills in the text, and `appendChild()` adds the elements to the page. Adding another object to the array produces another item without copying HTML.
+`script.js` finds the `reminder-list` container. A `forEach` loop passes each example to `addReminder`. That function uses `document.createElement()` to create an article, heading, time element, and paragraphs. `textContent` fills in the text, and `appendChild()` adds the elements to the page. Saving a new entry adds it to the array and calls the same function once.
 
 ## Structure Audit — October 26, 2026
 

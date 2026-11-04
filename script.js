@@ -137,6 +137,9 @@ reminderForm.addEventListener("input", () => {
 
 reminderForm.addEventListener("submit", event => {
   event.preventDefault();
+  // 保存后再次点击保留成功提示，修改表单才能开始下一条。 / Keep success on repeat clicks until a new entry is started.
+  if (reminderSaved) return;
+
   const selectedPriority = reminderForm.querySelector('input[name="priority"]:checked');
 
   // 提交时再次检查，Enter也会得到相同的校验。 / Validate again on submit, including Enter.
