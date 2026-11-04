@@ -31,6 +31,8 @@ This first version keeps new reminders on the current page. Refreshing returns t
 
 **Next week's goal** — Decide how reminders should remain available after a refresh.
 
+**AI use** — Through discussion with AI, I learned how to use a form’s submit event, check user input, and update the page using a state variable and if/else.
+
 ## Weekly update - October 30, 2026
 
 - Used Grid for the page, introduction/form section, and upcoming-reminders section. Each reminder aligns its name, date/time, and priority.
