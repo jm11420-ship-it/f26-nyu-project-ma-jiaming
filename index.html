@@ -31,7 +31,7 @@
         <div class="panel" id="add-reminder">
           <h2 id="add-heading">Add a reminder</h2>
           <p class="note" id="preview-note">Preview only. Entries are not saved yet.</p>
-          <form aria-labelledby="add-heading" aria-describedby="preview-note">
+          <form id="reminder-form" aria-labelledby="add-heading" aria-describedby="preview-note" novalidate>
             <div class="field full-width">
               <label for="event-name">Event name</label>
               <input id="event-name" name="event-name" type="text" placeholder="Group meeting" required />
@@ -62,9 +62,9 @@
               </div>
               <p id="priority-help">Choose a priority. Reminder timing is set for you.</p>
             </fieldset>
-            <!-- 这里只展示按钮，尚未连接保存功能。
-                 This button is a preview; saving is not connected yet. -->
-            <button class="full-width" type="button">Save reminder</button>
+            <!-- 点击按钮或按Enter都通过表单提交处理。
+                 Clicking Save or pressing Enter uses the same form submit handler. -->
+            <button class="full-width" id="save-reminder" type="submit">Save reminder</button>
           </form>
         </div>
       </section>

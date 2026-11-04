@@ -1,3 +1,5 @@
+console.log("script.js is connected");
+
 // 五条示例提醒，每条都有名称、日期、时间和优先级。
 // Five example reminders, each with a title, date, time, and priority.
 const reminders = [
@@ -108,7 +110,34 @@ function isValidDate(value) {
 
 // 分别启用日期和时间的自动格式；时间范围是00:00到23:59。
 // Set up date and time formatting; valid times run from 00:00 to 23:59.
+function isValidTime(value) {
+  return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+
 setupNumericInput("event-date", [4, 2, 2], "-", isValidDate,
   "Enter a valid date in YYYY-MM-DD format.");
-setupNumericInput("event-time", [2, 2], ":", value => /^([01]\d|2[0-3]):[0-5]\d$/.test(value),
+setupNumericInput("event-time", [2, 2], ":", isValidTime,
   "Enter a valid 24-hour time, from 00:00 to 23:59.");
+
+// reminderSaved lets students know their entry was saved and prevents repeat saves. / 记录保存状态，避免重复保存。
+let reminderSaved = false;
+const reminderForm = document.getElementById("reminder-form");
+const eventName = document.getElementById("event-name");
+const eventDate = document.getElementById("event-date");
+const eventTime = document.getElementById("event-time");
+
+// 修改表单后开始一条新记录。 / Editing starts a new entry.
+reminderForm.addEventListener("input", () => {
+  reminderSaved = false;
+});
+
+reminderForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const selectedPriority = reminderForm.querySelector('input[name="priority"]:checked');
+
+  // 提交时再次检查，Enter也会得到相同的校验。 / Validate again on submit, including Enter.
+  reminderSaved = eventName.value.trim() !== "" &&
+    isValidDate(eventDate.value) && isValidTime(eventTime.value) &&
+    selectedPriority !== null;
+  console.log("reminderSaved:", reminderSaved);
+});
