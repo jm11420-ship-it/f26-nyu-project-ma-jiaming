@@ -1,10 +1,37 @@
 # Student Reminder
 
-## Mockups
+**Latest mockups** — [Assignment 4 - Simple](https://www.figma.com/design/0SoEjWDAEfPn7mrhA9K1r1/JiamingMa_LandingPage?node-id=15-412)
 
-[Latest mockups: Assignment 4 - Simple](https://www.figma.com/design/0SoEjWDAEfPn7mrhA9K1r1/JiamingMa_LandingPage?node-id=15-412)
+**Live site** — Not published yet.
 
-The webpage now adds an upcoming-reminders list below the form. The saved and reminder states are still displayed as examples on the same page.
+## Project Log
+
+### Week 8 — November 4, 2026
+
+**State Plan**
+
+- **User story** — As a student, I want to quickly save an event and see it in my reminders so that I can check what I entered.
+- **What does the page remember?** Whether the current reminder has been saved successfully, using `reminderSaved`.
+- **What does it start at?** `false`. The form is empty and five example reminders are shown.
+- **What changes it?** Saving valid inputs changes it to `true`. Editing the form starts a new entry and changes it back to `false`.
+- **What does the user see?** A new reminder in the list and a success message. Incomplete or invalid inputs show an English message instead.
+- **What does the `if/else` decide?** Whether to add the reminder and show success, or ask the user to correct the form. An already-saved entry cannot be added again by repeated clicks.
+
+This first version keeps new reminders on the current page. Refreshing returns to the five examples.
+
+**What changed** — To be completed during implementation.
+
+**What was hard, and what I tried** — To be completed during implementation.
+
+**What happened when I tried to break it** — To be completed after testing.
+
+**What I learned or changed my mind about** — To be completed after testing.
+
+**Question for Joey** — To be completed before submission.
+
+**Next week's goal** — To be completed before submission.
+
+**AI use** — Codex helped organize the state plan from my decision to make Save reminder work. Implementation and testing details will be added as the work is completed.
 
 ## Weekly update - October 30, 2026
 
