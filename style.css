@@ -140,6 +140,23 @@ fieldset {
   font-weight: 600;
 }
 
+/* 在保存按钮下显示结果，用原来的警示色标记错误。
+   Show feedback below Save and use the existing accent for errors. */
+.save-message {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.save-message:empty {
+  display: none;
+}
+
+.save-error {
+  border-left: 3px solid var(--amber);
+  padding-left: 12px;
+}
+
 /* fieldset是Grid子项；内部Flex只负责一组选项横排，空间不足时换行。
    Inside the fieldset grid item, Flex keeps options in a row and allows wrapping. */
 .priority-options {
@@ -187,8 +204,8 @@ button {
 
 /* 第二处section Grid：统一标题与列表间距，每条事项再对齐信息。
    Second section grid: space the heading and list; item grids align event details.
-   与A4不同：保留后加的列表，便于回顾事项；当前仍为示例数据，不能编辑。
-   Unlike A4, the added list supports reviewing events; entries are still samples, not editable. */
+   保留后加的列表，便于回顾示例和用户新添加的事项。
+   Keep the added list for reviewing examples and newly saved reminders. */
 .upcoming {
   display: grid;
   gap: 16px;
@@ -216,8 +233,8 @@ strong {
   font-weight: 600;
 }
 
-/* 与A4弹窗不同：状态保留为静态示例，用正常文档流，限制宽度便于阅读。
-   Unlike A4's dialogs, states remain static examples in normal flow with a readable width. */
+/* 提醒示例使用正常文档流，限制宽度便于阅读。
+   The reminder example uses normal flow with a readable width. */
 .state-example {
   width: 100%;
   max-width: 640px;

@@ -14,9 +14,8 @@ const reminders = [
 // Find the reminders container by its id.
 const reminderList = document.getElementById("reminder-list");
 
-// forEach逐条读取数组，createElement为每条提醒创建HTML元素。
-// forEach reads each item; createElement builds its HTML elements.
-reminders.forEach(reminder => {
+// 示例和新事项共用同一种显示方式。 / Use the same layout for examples and new reminders.
+function addReminder(reminder) {
   const article = document.createElement("article");
   article.className = "reminder-item";
 
@@ -40,7 +39,9 @@ reminders.forEach(reminder => {
   article.appendChild(dateLine);
   article.appendChild(priority);
   reminderList.appendChild(article);
-});
+}
+
+reminders.forEach(addReminder);
 
 // 共用的输入设置：按位数分组，自动补符号，例如日期分成4、2、2位。
 // Shared input setup: group digits and add separators, such as 4, 2, 2 for dates.
@@ -125,10 +126,13 @@ const reminderForm = document.getElementById("reminder-form");
 const eventName = document.getElementById("event-name");
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
+const saveMessage = document.getElementById("save-message");
 
 // 修改表单后开始一条新记录。 / Editing starts a new entry.
 reminderForm.addEventListener("input", () => {
   reminderSaved = false;
+  saveMessage.textContent = "";
+  saveMessage.classList.remove("save-error");
 });
 
 reminderForm.addEventListener("submit", event => {
@@ -140,4 +144,22 @@ reminderForm.addEventListener("submit", event => {
     isValidDate(eventDate.value) && isValidTime(eventTime.value) &&
     selectedPriority !== null;
   console.log("reminderSaved:", reminderSaved);
+
+  // 用保存状态决定添加事项还是提示修改。 / Use the save state to add an entry or ask for corrections.
+  if (reminderSaved) {
+    const reminder = {
+      title: eventName.value.trim(),
+      date: eventDate.value,
+      time: eventTime.value,
+      priority: selectedPriority.value.charAt(0).toUpperCase() + selectedPriority.value.slice(1)
+    };
+    reminders.push(reminder);
+    addReminder(reminder);
+    saveMessage.textContent = "Reminder saved. " + reminder.title + " was added to the list.";
+    saveMessage.classList.remove("save-error");
+    reminderForm.reset();
+  } else {
+    saveMessage.textContent = "Enter an event name, a valid date and time, and choose a priority.";
+    saveMessage.classList.add("save-error");
+  }
 });

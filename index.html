@@ -1,6 +1,6 @@
 <!doctype html>
-<!-- 设计稿区块：页头简介、添加提醒、保存成功示例、提醒示例、页脚。
-     Mockup sections: introduction, add reminder, saved example, reminder example, footer.
+<!-- 设计稿区块：页头简介、添加提醒及保存反馈、提醒示例、页脚。
+     Mockup sections: introduction, add reminder with save feedback, reminder example, footer.
      作业6新增了提醒列表，放在表单下方。
      Assignment 6 adds the reminders list below the form. -->
 <html lang="en">
@@ -30,7 +30,7 @@
              aria-labelledby gives the form its heading as an accessible name. -->
         <div class="panel" id="add-reminder">
           <h2 id="add-heading">Add a reminder</h2>
-          <p class="note" id="preview-note">Preview only. Entries are not saved yet.</p>
+          <p class="note" id="preview-note">New reminders stay on this page until you refresh.</p>
           <form id="reminder-form" aria-labelledby="add-heading" aria-describedby="preview-note" novalidate>
             <div class="field full-width">
               <label for="event-name">Event name</label>
@@ -65,29 +65,19 @@
             <!-- 点击按钮或按Enter都通过表单提交处理。
                  Clicking Save or pressing Enter uses the same form submit handler. -->
             <button class="full-width" id="save-reminder" type="submit">Save reminder</button>
+            <p class="full-width save-message" id="save-message" role="status"></p>
           </form>
         </div>
       </section>
 
-      <!-- 提醒列表：script.js把数组中的示例事项放到这个容器里。
-           script.js fills this container with example events from the array. -->
+      <!-- 提醒列表：先显示示例，再添加用户保存的事项。
+           Show example reminders first, then add the user's saved entries. -->
       <section class="panel upcoming" aria-labelledby="upcoming-heading">
         <header>
           <h2 id="upcoming-heading">Upcoming reminders</h2>
-          <p class="note">Example reminders</p>
+          <p class="note">Includes examples. New reminders appear at the end of the list.</p>
         </header>
         <div id="reminder-list"></div>
-      </section>
-
-      <!-- 保存成功示例：展示设计稿中的确认界面。
-           Saved example: shows the confirmation state from the mockup. -->
-      <section class="panel state-example" aria-labelledby="saved-heading">
-        <p class="note">Saved state example</p>
-        <h2 id="saved-heading">Reminder saved</h2>
-        <p><strong>Group meeting</strong></p>
-        <p><time datetime="2026-10-13T15:00">2026-10-13 at 15:00</time></p>
-        <p>Priority: High</p>
-        <button type="button">Done</button>
       </section>
 
       <!-- 提醒示例：“提前30分钟”只是示例文字，优先级规则尚未确定。
@@ -106,7 +96,7 @@
          Footer: explains the planned behavior and the limits of this preview. -->
     <footer>
       <p>Planned behavior: reminders appear while this page is open.</p>
-      <p>This preview does not save events or send reminders.</p>
+      <p>New reminders are kept on this page and cleared when you refresh. Timed notifications are planned.</p>
     </footer>
     <script src="script.js"></script>
   </body>
