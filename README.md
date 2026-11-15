@@ -6,6 +6,33 @@
 
 ## Project Log
 
+### Week 9 — November 14, 2026
+
+**Render Plan**
+
+- **User story** — As a student, I want to save an event and spot it in my list so that I can check that I recorded it correctly.
+- **State** — Keep the `reminders` array. `lastSavedReminder` starts as `null`, `saveStatus` as `"idle"`, and date/time errors as empty strings.
+- **What changes it** — A valid save adds an item, remembers it, and sets `saveStatus` to `"saved"`. An invalid save sets `"error"`. Editing sets `"idle"`; repeat saves add nothing.
+- **What render() draws** — Rebuild the reminder list from `reminders` and show form feedback from the current state.
+- **The if inside the loop** — Check whether each item is `lastSavedReminder`; only that item gets “Just added.”
+- **What else render() works out** — The actual reminder count and the success/error message.
+
+**What changed** — Pending implementation.
+
+**Patching vs. rendering** — Pending implementation.
+
+**What was hard, and what I tried** — Pending implementation.
+
+**What happened when I tried to break it** — Pending testing.
+
+**What I learned or changed my mind about** — Pending implementation.
+
+**Question for Joey** — Is marking the most recently saved reminder enough confirmation for this flow?
+
+**Next week's goal** — Keep reminders after a refresh, before adding timed alerts.
+
+**AI use** — I discussed the Save flow and render pattern with AI while preparing this plan.
+
 ### Week 8 — November 4, 2026
 
 **State Plan**
