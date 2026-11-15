@@ -10,64 +10,86 @@ const reminders = [
   { title: "Submit coding assignment", date: "2026-10-30", time: "23:59", priority: "High" }
 ];
 
-// 通过id找到页面上放提醒列表的位置。
-// Find the reminders container by its id.
+// 找到需要更新的区域，保留原来的表单节点。 / Find output areas and keep the existing form nodes.
 const reminderList = document.getElementById("reminder-list");
 const reminderCount = document.getElementById("reminder-count");
+const reminderForm = document.getElementById("reminder-form");
+const eventName = document.getElementById("event-name");
+const eventDate = document.getElementById("event-date");
+const eventTime = document.getElementById("event-time");
+const saveMessage = document.getElementById("save-message");
 
-// 记住最近保存的事项，便于在列表中找到它。 / Remember the latest save so it is easy to spot.
+// 记住最近保存项和表单结果，让学生确认记录。 / Remember the latest save and form result for confirmation.
 let lastSavedReminder = null;
+let saveStatus = "idle"; // idle：正在填写；saved：已保存；error：需修改。 / Editing, saved, or invalid.
+const inputErrors = { "event-date": "", "event-time": "" };
 
-// 示例和新事项共用同一种显示方式。 / Use the same layout for examples and new reminders.
-function addReminder(reminder) {
-  const article = document.createElement("article");
-  article.className = "reminder-item";
-
-  // textContent把事项名称写成文字。
-  // textContent inserts the event name as text.
-  const title = document.createElement("h3");
-  title.textContent = reminder.title;
-
-  const dateLine = document.createElement("p");
-  const dateTime = document.createElement("time");
-  dateTime.dateTime = reminder.date + "T" + reminder.time;
-  dateTime.textContent = reminder.date + " at " + reminder.time;
-  dateLine.appendChild(dateTime);
-
-  const priority = document.createElement("p");
-  priority.textContent = "Priority: " + reminder.priority;
-
-  // appendChild把标题、日期和优先级放进这一条提醒，再放到页面中。
-  // appendChild puts the details into the reminder, then adds it to the page.
-  article.appendChild(title);
-  article.appendChild(dateLine);
-  article.appendChild(priority);
-  reminderList.appendChild(article);
-  return article;
-}
-
-// render: 重画提醒列表、最新标记和总数。 / Draw the reminders, latest-save marker, and count.
+// render: 重画列表、最新标记、数量和表单反馈。 / Draw reminders, the latest marker, count, and form feedback.
 function render() {
+  // 每次先清空，避免重复画出相同事项。 / Clear the old list so redrawing does not duplicate items.
   reminderList.innerHTML = "";
   let shown = 0;
+
   reminders.forEach(reminder => {
-    const article = addReminder(reminder);
+    const article = document.createElement("article");
+    article.className = "reminder-item";
+    const title = document.createElement("h3");
+    title.textContent = reminder.title;
+
+    // 读取状态，判断这一条是否刚保存。 / Read state to check whether this is the latest save.
     if (reminder === lastSavedReminder) {
       const marker = document.createElement("span");
       marker.className = "new-label";
       marker.textContent = "Just added";
-      article.querySelector("h3").appendChild(marker);
+      title.appendChild(marker);
     }
+
+    const dateLine = document.createElement("p");
+    const dateTime = document.createElement("time");
+    dateTime.dateTime = reminder.date + "T" + reminder.time;
+    dateTime.textContent = reminder.date + " at " + reminder.time;
+    dateLine.appendChild(dateTime);
+
+    const priority = document.createElement("p");
+    priority.textContent = "Priority: " + reminder.priority;
+    article.appendChild(title);
+    article.appendChild(dateLine);
+    article.appendChild(priority);
+    reminderList.appendChild(article);
     shown += 1;
   });
+
+  // 从本次循环计算数量，不累计点击次数。 / Count the displayed items, not button clicks.
   reminderCount.textContent = shown + " reminders";
+
+  if (saveStatus === "saved") {
+    saveMessage.textContent = "Reminder saved. " + lastSavedReminder.title +
+      " was added to the list. Enter another event to save a new reminder.";
+    // 输入时先切回idle，之后render不会清空正在填写的内容。 / Editing switches to idle before render, keeping new input.
+    reminderForm.reset();
+  } else if (saveStatus === "error") {
+    saveMessage.textContent = "Enter an event name, a valid date and time, and choose a priority.";
+  } else {
+    saveMessage.textContent = "";
+  }
+  saveMessage.classList.toggle("save-error", saveStatus === "error");
+
+  // 日期和时间的错误显示也由状态决定。 / Date and time error displays also come from state.
+  Object.keys(inputErrors).forEach(id => {
+    const input = document.getElementById(id);
+    const error = document.getElementById(id.replace("event-", "") + "-error");
+    const message = inputErrors[id];
+    input.setCustomValidity(message);
+    input.setAttribute("aria-invalid", String(message !== ""));
+    error.textContent = message;
+    error.hidden = message === "";
+  });
 }
 
 // 共用的输入设置：按位数分组，自动补符号，例如日期分成4、2、2位。
 // Shared input setup: group digits and add separators, such as 4, 2, 2 for dates.
 function setupNumericInput(id, groups, separator, isValid, message) {
   const input = document.getElementById(id);
-  const error = document.getElementById(id.replace("event-", "") + "-error");
   const digitLimit = groups.reduce((total, size) => total + size, 0);
 
   // 删除时遇到横线或冒号，也删掉相邻数字，避免光标卡在符号旁。
@@ -103,20 +125,16 @@ function setupNumericInput(id, groups, separator, isValid, message) {
       cursor += 1;
     }
     input.setSelectionRange(cursor, cursor);
-    input.setCustomValidity("");
-    input.removeAttribute("aria-invalid");
-    error.hidden = true;
-    error.textContent = "";
+    inputErrors[id] = "";
+    // input事件接着冒泡到表单，由那里改状态并render。 / The event then bubbles to the form to update state and render.
   });
 
   // 离开输入框时再检查，输入过程中不反复报错。
   // Validate on blur, so errors do not interrupt every keystroke.
   input.addEventListener("blur", () => {
     const invalid = input.value !== "" && !isValid(input.value);
-    input.setCustomValidity(invalid ? message : "");
-    input.setAttribute("aria-invalid", String(invalid));
-    error.textContent = invalid ? message : "";
-    error.hidden = !invalid;
+    inputErrors[id] = invalid ? message : "";
+    render();
   });
 }
 
@@ -140,36 +158,27 @@ setupNumericInput("event-date", [4, 2, 2], "-", isValidDate,
 setupNumericInput("event-time", [2, 2], ":", isValidTime,
   "Enter a valid 24-hour time, from 00:00 to 23:59.");
 
-// reminderSaved lets students know their entry was saved and prevents repeat saves. / 记录保存状态，避免重复保存。
-let reminderSaved = false;
-const reminderForm = document.getElementById("reminder-form");
-const eventName = document.getElementById("event-name");
-const eventDate = document.getElementById("event-date");
-const eventTime = document.getElementById("event-time");
-const saveMessage = document.getElementById("save-message");
-
 // 修改表单后开始一条新记录。 / Editing starts a new entry.
 reminderForm.addEventListener("input", () => {
-  reminderSaved = false;
-  saveMessage.textContent = "";
-  saveMessage.classList.remove("save-error");
+  saveStatus = "idle";
+  render();
 });
 
+// 点击Save或按Enter都会到这里。 / Save clicks and Enter use the same submit handler.
 reminderForm.addEventListener("submit", event => {
   event.preventDefault();
-  // 保存后再次点击保留成功提示，修改表单才能开始下一条。 / Keep success on repeat clicks until a new entry is started.
-  if (reminderSaved) return;
+  // 已保存就不再加入数组；仍根据状态显示确认。 / A saved entry is not added again; redraw its confirmation.
+  if (saveStatus === "saved") {
+    render();
+    return;
+  }
 
   const selectedPriority = reminderForm.querySelector('input[name="priority"]:checked');
-
-  // 提交时再次检查，Enter也会得到相同的校验。 / Validate again on submit, including Enter.
-  reminderSaved = eventName.value.trim() !== "" &&
+  const valid = eventName.value.trim() !== "" &&
     isValidDate(eventDate.value) && isValidTime(eventTime.value) &&
     selectedPriority !== null;
-  console.log("reminderSaved:", reminderSaved);
 
-  // 用保存状态决定添加事项还是提示修改。 / Use the save state to add an entry or ask for corrections.
-  if (reminderSaved) {
+  if (valid) {
     const reminder = {
       title: eventName.value.trim(),
       date: eventDate.value,
@@ -177,14 +186,16 @@ reminderForm.addEventListener("submit", event => {
       priority: selectedPriority.value.charAt(0).toUpperCase() + selectedPriority.value.slice(1)
     };
     reminders.push(reminder);
-    addReminder(reminder);
-    saveMessage.textContent = "Reminder saved. " + reminder.title + " was added to the list.";
-    saveMessage.classList.remove("save-error");
-    reminderForm.reset();
+    lastSavedReminder = reminder;
+    saveStatus = "saved";
+    inputErrors["event-date"] = "";
+    inputErrors["event-time"] = "";
   } else {
-    saveMessage.textContent = "Enter an event name, a valid date and time, and choose a priority.";
-    saveMessage.classList.add("save-error");
+    saveStatus = "error";
   }
+
+  // 先改数据和状态，再统一更新页面。 / Change data and state first, then redraw the page.
+  render();
 });
 
 // 初次打开也根据状态显示页面。 / Draw the initial page from state too.
