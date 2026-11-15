@@ -229,6 +229,18 @@ button {
   margin: 0;
 }
 
+/* 用原来的警示色标记最近保存项 / Mark the latest save with the existing accent. */
+.new-label {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--amber);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 strong {
   font-weight: 600;
 }

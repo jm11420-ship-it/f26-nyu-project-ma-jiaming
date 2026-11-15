@@ -13,6 +13,10 @@ const reminders = [
 // 通过id找到页面上放提醒列表的位置。
 // Find the reminders container by its id.
 const reminderList = document.getElementById("reminder-list");
+const reminderCount = document.getElementById("reminder-count");
+
+// 记住最近保存的事项，便于在列表中找到它。 / Remember the latest save so it is easy to spot.
+let lastSavedReminder = null;
 
 // 示例和新事项共用同一种显示方式。 / Use the same layout for examples and new reminders.
 function addReminder(reminder) {
@@ -39,9 +43,25 @@ function addReminder(reminder) {
   article.appendChild(dateLine);
   article.appendChild(priority);
   reminderList.appendChild(article);
+  return article;
 }
 
-reminders.forEach(addReminder);
+// render: 重画提醒列表、最新标记和总数。 / Draw the reminders, latest-save marker, and count.
+function render() {
+  reminderList.innerHTML = "";
+  let shown = 0;
+  reminders.forEach(reminder => {
+    const article = addReminder(reminder);
+    if (reminder === lastSavedReminder) {
+      const marker = document.createElement("span");
+      marker.className = "new-label";
+      marker.textContent = "Just added";
+      article.querySelector("h3").appendChild(marker);
+    }
+    shown += 1;
+  });
+  reminderCount.textContent = shown + " reminders";
+}
 
 // 共用的输入设置：按位数分组，自动补符号，例如日期分成4、2、2位。
 // Shared input setup: group digits and add separators, such as 4, 2, 2 for dates.
@@ -166,3 +186,6 @@ reminderForm.addEventListener("submit", event => {
     saveMessage.classList.add("save-error");
   }
 });
+
+// 初次打开也根据状态显示页面。 / Draw the initial page from state too.
+render();
