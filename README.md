@@ -17,21 +17,21 @@
 - **The if inside the loop** — Check whether each item is `lastSavedReminder`; only that item gets “Just added.”
 - **What else render() works out** — The actual reminder count and the success/error message.
 
-**What changed** — Pending implementation.
+**What changed** — Added a reminder count and “Just added” on the latest save. `render()` now draws the list and feedback.
 
-**Patching vs. rendering** — Pending implementation.
+**Patching vs. rendering** — Before, Save appended one item and changed messages directly. Now it updates the array and state, then `render()` rebuilds the list and feedback from them.
 
-**What was hard, and what I tried** — Pending implementation.
+**What was hard, and what I tried** — Kept number formatting before the form input handler, which switches to `idle` before rendering. This keeps new typing from being cleared.
 
-**What happened when I tried to break it** — Pending testing.
+**What happened when I tried to break it** — Started with 5 items and no marker. Button and Enter saves gave 6, then 7, with one marker on the latest item. Ten repeated clicks and ten Enter presses added nothing. Empty fields, February 30, and 24:00 were rejected. Starting the next date kept its first digit. I added a space between the title and marker after checking their text. At 375px, saving worked without sideways scrolling. Refresh returned to 5 examples; Console had no errors.
 
-**What I learned or changed my mind about** — Pending implementation.
+**What I learned or changed my mind about** — The count should come from the list. Clearing and redrawing keeps it in agreement with the items.
 
 **Question for Joey** — Is marking the most recently saved reminder enough confirmation for this flow?
 
 **Next week's goal** — Keep reminders after a refresh, before adding timed alerts.
 
-**AI use** — I discussed the Save flow and render pattern with AI while preparing this plan.
+**AI use** — I discussed state and rendering with AI and used its help to edit and check the code.
 
 ### Week 8 — November 4, 2026
 
@@ -81,7 +81,7 @@ This first version keeps new reminders on the current page. Refreshing returns t
 
 The `reminders` array contains five example student events. Each object has `title`, `date`, `time`, and `priority`, matching the information in the form. The dates are demonstration data, not an actual class schedule.
 
-`script.js` finds the `reminder-list` container. A `forEach` loop passes each example to `addReminder`. That function uses `document.createElement()` to create an article, heading, time element, and paragraphs. `textContent` fills in the text, and `appendChild()` adds the elements to the page. Saving a new entry adds it to the array and calls the same function once.
+`render()` clears `reminder-list`, loops through `reminders`, and builds each article. Its `if` checks which item is `lastSavedReminder` and adds the marker. It also computes the count and shows form feedback. Saving changes the array and state, then calls `render()`. The page calls it once at startup too.
 
 ## Structure Audit — October 26, 2026
 

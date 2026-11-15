@@ -41,6 +41,7 @@ function render() {
       const marker = document.createElement("span");
       marker.className = "new-label";
       marker.textContent = "Just added";
+      title.appendChild(document.createTextNode(" "));
       title.appendChild(marker);
     }
 
