@@ -86,8 +86,6 @@ function render() {
       saveMessage.textContent = "Reminder saved. " + lastSavedReminder.title +
         " is hidden by the current filter. Choose All to see it.";
     }
-    // 输入时先切回idle，之后render不会清空正在填写的内容。 / Editing switches to idle before render, keeping new input.
-    reminderForm.reset();
   } else if (saveStatus === "error") {
     saveMessage.textContent = "Enter an event name, a valid date and time, and choose a priority.";
   } else {
@@ -179,7 +177,7 @@ setupNumericInput("event-date", [4, 2, 2], "-", isValidDate,
 setupNumericInput("event-time", [2, 2], ":", isValidTime,
   "Enter a valid 24-hour time, from 00:00 to 23:59.");
 
-// 修改表单后开始一条新记录。 / Editing starts a new entry.
+// 修改表单后允许再次保存，并清除旧反馈。 / Editing allows a new save and clears the old feedback.
 reminderForm.addEventListener("input", () => {
   saveStatus = "idle";
   render();
@@ -211,6 +209,8 @@ reminderForm.addEventListener("submit", event => {
     saveStatus = "saved";
     inputErrors["event-date"] = "";
     inputErrors["event-time"] = "";
+    // 只在成功保存时清空一次，筛选和重画不会清空输入。 / Reset once after saving; filtering and redrawing keep input.
+    reminderForm.reset();
   } else {
     saveStatus = "error";
   }

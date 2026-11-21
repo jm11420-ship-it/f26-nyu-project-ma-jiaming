@@ -15,21 +15,21 @@
 - **State** — New `priorityFilter` starts as `"All"`. Keep the Week 9 reminders and save state.
 - **My function** — `matchesPriority(reminder)` takes one reminder and returns `true` if it matches the selected priority or the filter is All; otherwise it returns `false`. `render()` uses the answer.
 
-**What changed** — To complete after building.
+**What changed** — Added a priority filter and “Showing X of Y reminders.” Following the Week 9 feedback, the form now resets only after a successful save.
 
-**Why redraw on every event** — To complete after building.
+**Why redraw on every event** — The handler stores the selected priority, then calls `render()`. Reading the same state keeps the list, count, and save message together when filtering or saving.
 
-**What was hard, and what I tried** — To complete after building.
+**What was hard, and what I tried** — Saving a Low reminder while viewing High can look like a failed save. Added a message explaining that the filter hides it and suggesting All.
 
-**What happened when I tried to break it** — To complete after testing.
+**What happened when I tried to break it** — All started with 5 items; High, Medium, and Low showed 2, 2, and 1. Switching kept the unfinished form. Saving High gave 3 of 6; five extra clicks and five Enter presses added nothing. Saving Low while viewing High gave 3 of 7 and the hidden-item message; All showed 7. February 30 and 24:00 were rejected; correcting them to February 29, 2028 and 00:00 saved successfully. Refresh restored 5 examples. At 375px there was no sideways scrolling, and the Console showed no errors.
 
-**What I learned or changed my mind about** — To complete after testing.
+**What I learned or changed my mind about** — A filter hides items without removing them from the array. Before using the helper in `render()`, its Console checks returned `true` for a match and `false` for a mismatch.
 
-**Question for Joey** — To complete after testing.
+**Question for Joey** — Should the selected filter stay active after saving, or should saving switch back to All?
 
 **Next week's goal** — Keep reminders after a refresh, before adding timed alerts.
 
-**AI use** — I discussed the requirements and a priority filter with AI. I will record the coding and testing help when this entry is finished.
+**AI use** — I discussed `change`, `event.target.value`, and return values with AI, and used its help to edit and test the code.
 
 ### Week 9 — November 14, 2026
 
@@ -106,7 +106,7 @@ This first version keeps new reminders on the current page. Refreshing returns t
 
 The `reminders` array contains five example student events. Each object has `title`, `date`, `time`, and `priority`, matching the information in the form. The dates are demonstration data, not an actual class schedule.
 
-`render()` clears `reminder-list`, loops through `reminders`, and builds each article. Its `if` checks which item is `lastSavedReminder` and adds the marker. It also computes the count and shows form feedback. Saving changes the array and state, then calls `render()`. The page calls it once at startup too.
+`render()` clears `reminder-list` and loops through `reminders`. `matchesPriority(reminder)` decides which items to show; the latest save gets “Just added.” It also computes the visible and total counts and shows form feedback. Saving or filtering changes state, then calls `render()`. The page calls it once at startup too.
 
 ## Structure Audit — October 26, 2026
 
