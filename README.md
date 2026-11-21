@@ -6,6 +6,31 @@
 
 ## Project Log
 
+### Week 10 — November 21, 2026
+
+**Event Plan**
+
+- **User story** — As a student, I want to view reminders by priority so that I can quickly find the important events.
+- **The event** — A `change` event on a “Show priority” select. Choosing All, High, Medium, or Low updates the list without another button.
+- **State** — New `priorityFilter` starts as `"All"`. Keep the Week 9 reminders and save state.
+- **My function** — `matchesPriority(reminder)` takes one reminder and returns `true` if it matches the selected priority or the filter is All; otherwise it returns `false`. `render()` uses the answer.
+
+**What changed** — To complete after building.
+
+**Why redraw on every event** — To complete after building.
+
+**What was hard, and what I tried** — To complete after building.
+
+**What happened when I tried to break it** — To complete after testing.
+
+**What I learned or changed my mind about** — To complete after testing.
+
+**Question for Joey** — To complete after testing.
+
+**Next week's goal** — Keep reminders after a refresh, before adding timed alerts.
+
+**AI use** — I discussed the requirements and a priority filter with AI. I will record the coding and testing help when this entry is finished.
+
 ### Week 9 — November 14, 2026
 
 **Render Plan**
