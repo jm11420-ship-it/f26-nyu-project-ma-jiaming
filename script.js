@@ -23,6 +23,7 @@ const prioritySelect = document.getElementById("priority-filter");
 // 记住最近保存项和表单结果，让学生确认记录。 / Remember the latest save and form result for confirmation.
 let lastSavedReminder = null;
 let saveStatus = "idle"; // idle：正在填写；saved：已保存；error：需修改。 / Editing, saved, or invalid.
+let priorityFilter = "All"; // 当前要看的优先级。 / The priority currently being viewed.
 const inputErrors = { "event-date": "", "event-time": "" };
 
 // render: 重画列表、最新标记、数量和表单反馈。 / Draw reminders, the latest marker, count, and form feedback.
@@ -200,11 +201,10 @@ reminderForm.addEventListener("submit", event => {
   render();
 });
 
-// 先在控制台查看选项变化。 / First inspect the selection event in the Console.
+// 读取选项，更新状态，再重画列表。 / Read the choice, update state, then redraw.
 prioritySelect.addEventListener("change", event => {
-  console.log(event);
-  console.log("Event:", event.type, "Target:", event.target.id);
-  console.log("Selected priority:", event.target.value);
+  priorityFilter = event.target.value;
+  render();
 });
 
 // 初次打开也根据状态显示页面。 / Draw the initial page from state too.
