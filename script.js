@@ -26,6 +26,11 @@ let saveStatus = "idle"; // idle：正在填写；saved：已保存；error：�
 let priorityFilter = "All"; // 当前要看的优先级。 / The priority currently being viewed.
 const inputErrors = { "event-date": "", "event-time": "" };
 
+// 输入一条提醒，返回它是否符合当前筛选。 / Take one reminder and return whether it matches the filter.
+function matchesPriority(reminder) {
+  return priorityFilter === "All" || reminder.priority === priorityFilter;
+}
+
 // render: 重画列表、最新标记、数量和表单反馈。 / Draw reminders, the latest marker, count, and form feedback.
 function render() {
   // 每次先清空，避免重复画出相同事项。 / Clear the old list so redrawing does not duplicate items.
@@ -33,6 +38,9 @@ function render() {
   let shown = 0;
 
   reminders.forEach(reminder => {
+    // 不符合筛选的这一条直接跳过。 / Skip this reminder when it does not match.
+    if (!matchesPriority(reminder)) return;
+
     const article = document.createElement("article");
     article.className = "reminder-item";
     const title = document.createElement("h3");
@@ -63,11 +71,21 @@ function render() {
   });
 
   // 从本次循环计算数量，不累计点击次数。 / Count the displayed items, not button clicks.
-  reminderCount.textContent = shown + " reminders";
+  reminderCount.textContent = "Showing " + shown + " of " + reminders.length + " reminders";
+
+  if (shown === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.textContent = "No reminders match this priority. Choose All or add a reminder.";
+    reminderList.appendChild(emptyMessage);
+  }
 
   if (saveStatus === "saved") {
     saveMessage.textContent = "Reminder saved. " + lastSavedReminder.title +
       " was added to the list. Enter another event to save a new reminder.";
+    if (!matchesPriority(lastSavedReminder)) {
+      saveMessage.textContent = "Reminder saved. " + lastSavedReminder.title +
+        " is hidden by the current filter. Choose All to see it.";
+    }
     // 输入时先切回idle，之后render不会清空正在填写的内容。 / Editing switches to idle before render, keeping new input.
     reminderForm.reset();
   } else if (saveStatus === "error") {
