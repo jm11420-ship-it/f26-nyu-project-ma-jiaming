@@ -18,6 +18,7 @@ const eventName = document.getElementById("event-name");
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
 const saveMessage = document.getElementById("save-message");
+const prioritySelect = document.getElementById("priority-filter");
 
 // 记住最近保存项和表单结果，让学生确认记录。 / Remember the latest save and form result for confirmation.
 let lastSavedReminder = null;
@@ -197,6 +198,13 @@ reminderForm.addEventListener("submit", event => {
 
   // 先改数据和状态，再统一更新页面。 / Change data and state first, then redraw the page.
   render();
+});
+
+// 先在控制台查看选项变化。 / First inspect the selection event in the Console.
+prioritySelect.addEventListener("change", event => {
+  console.log(event);
+  console.log("Event:", event.type, "Target:", event.target.id);
+  console.log("Selected priority:", event.target.value);
 });
 
 // 初次打开也根据状态显示页面。 / Draw the initial page from state too.

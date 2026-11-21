@@ -112,7 +112,8 @@ legend {
   font-weight: 600;
 }
 
-.field input {
+.field input,
+.field select {
   display: block;
   width: 100%;
   min-width: 0;
@@ -184,6 +185,7 @@ input[type="radio"] {
 }
 
 input:focus-visible,
+select:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
@@ -213,6 +215,12 @@ button {
 
 .upcoming .note {
   margin-bottom: 0;
+}
+
+/* 筛选框沿用表单样式，手机上不超出卡片。 / Reuse form styles and keep the filter inside the panel on mobile. */
+.priority-filter {
+  max-width: 240px;
+  margin: 16px 0;
 }
 
 .reminder-item {

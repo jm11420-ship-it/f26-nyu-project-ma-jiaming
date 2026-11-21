@@ -76,8 +76,18 @@
         <header>
           <h2 id="upcoming-heading">Upcoming reminders</h2>
           <p class="note">Includes examples. New reminders appear at the end of the list.</p>
+          <!-- 筛选只控制下面的列表，不改变正在填写的表单。 / The filter changes the list, not the form being filled in. -->
+          <div class="field priority-filter">
+            <label for="priority-filter">Show priority</label>
+            <select id="priority-filter">
+              <option value="All">All</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
           <!-- 数量由当前列表计算 / Calculate the count from the current list. -->
-          <p id="reminder-count"></p>
+          <p id="reminder-count" role="status"></p>
         </header>
         <div id="reminder-list"></div>
       </section>
