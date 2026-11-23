@@ -8,7 +8,7 @@
 
 ### Week 11 — November 23, 2026
 
-**Self-check** — Adding an event works, but new reminders disappear after a refresh. The classmate test has not happened yet.
+**Self-check** — Adding an event works, but new reminders disappear after a refresh. The peer test found no major bugs in the functions tried, but the priority filter was easy to miss.
 
 **Main story** — As a student, I want to add an event with a name, date, and time so that I can remember it later.
 
@@ -27,21 +27,29 @@
 1. You have an important group meeting tomorrow at 5:00 PM. Add a high-priority reminder for it. After refreshing the page, try to find the reminder again.
 2. You want to focus on your most important events. Find your high-priority reminders, then return to the complete list.
 
-The tester will think aloud and try at least one task on a phone or in a narrow window. I will observe without giving instructions.
-
-**User test notes — to fill in after testing**
+**User test notes**
 
 - Maker: Jiaming Ma
-- Tester: __________
+- Tester: a classmate
 
-| Task | Completed? (Yes / With trouble / No) | Where they hesitated or got stuck | What they expected |
+| Task | Result | Where they hesitated or got stuck | What they expected |
 | --- | --- | --- | --- |
-| 1 | | | |
-| 2 | | | |
+| 1 | Partly tested | Saving worked. The tester did not try refreshing. | Not recorded. |
+| 2 | With trouble | The tester noticed the priority filter only after I pointed it out, then used it successfully. | Not recorded. |
 
-Tester's one-line takeaway: __________
+Test summary (paraphrased): The functions tried worked; the main issues were how easy the page was to understand and use.
 
-Most surprising finding: __________
+Most surprising finding: The filter worked, but the tester needed a hint to find it.
+
+**Feedback and next changes** — Use the empty upper-left area on desktop and place Reminder above Upcoming reminders. Make date/time errors clearer and use Low as the default priority. The Reminder section is still an example; later it should show the nearest future event rather than a past one. These changes are not implemented yet.
+
+**Punch list — planned**
+
+- **Must ship:** keep saved events after refresh (main-story audit); make the priority filter easier to notice (peer test); make date/time feedback clear and consistent on Save (feedback; validation already exists); clearly identify the reminder example and resolve its inactive Got it action (page audit).
+- **Nice to have:** improve the desktop layout, default priority to Low, and connect Reminder to the nearest future event.
+- **Cut:** no semester scope cuts decided yet.
+
+Still to check with a tester: refresh and at least one task on a phone or in a narrow window. Returning from High to All was not separately recorded.
 
 ### Week 10 — November 21, 2026
 
