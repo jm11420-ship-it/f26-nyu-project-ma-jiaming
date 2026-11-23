@@ -2,9 +2,46 @@
 
 **Latest mockups** — [Assignment 4 - Simple](https://www.figma.com/design/0SoEjWDAEfPn7mrhA9K1r1/JiamingMa_LandingPage?node-id=15-412)
 
-**Live site** — Not published yet.
+**Live site** — [Student Reminder](https://jm11420-ship-it.github.io/f26-nyu-project-ma-jiaming/)
 
 ## Project Log
+
+### Week 11 — November 23, 2026
+
+**Self-check** — Adding an event works, but new reminders disappear after a refresh. The classmate test has not happened yet.
+
+**Main story** — As a student, I want to add an event with a name, date, and time so that I can remember it later.
+
+| Acceptance criterion | Status | Notes |
+| --- | --- | --- |
+| Save an event with a name, date, and time. | Done | The event appears in the list with a confirmation message. |
+| Stop saving when required fields are empty and show a message. | Done | Missing information is flagged without adding an event. |
+| Keep saved events after refreshing. | Missing | Refreshing restores the five examples and removes new entries. |
+
+**Design change** — The form also requires Low, Medium, or High priority. This replaces choosing reminder times manually; timed alerts are not built yet.
+
+**User and situation** — A student wants to quickly record an upcoming event and find it again later, without setting up a detailed calendar.
+
+**Test tasks**
+
+1. You have an important group meeting tomorrow at 5:00 PM. Add a high-priority reminder for it. After refreshing the page, try to find the reminder again.
+2. You want to focus on your most important events. Find your high-priority reminders, then return to the complete list.
+
+The tester will think aloud and try at least one task on a phone or in a narrow window. I will observe without giving instructions.
+
+**User test notes — to fill in after testing**
+
+- Maker: Jiaming Ma
+- Tester: __________
+
+| Task | Completed? (Yes / With trouble / No) | Where they hesitated or got stuck | What they expected |
+| --- | --- | --- | --- |
+| 1 | | | |
+| 2 | | | |
+
+Tester's one-line takeaway: __________
+
+Most surprising finding: __________
 
 ### Week 10 — November 21, 2026
 
